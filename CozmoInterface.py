@@ -3,7 +3,7 @@
 
 import cozmo
 import xbox
-import cozmo.robot
+
 
 def cozmo_program(robot: cozmo.robot.Robot):
     """
@@ -20,6 +20,7 @@ def cozmo_program(robot: cozmo.robot.Robot):
         x = joy.rightX()
         left_Trigger = joy.leftTrigger()
         right_Trigger = joy.rightTrigger()
+
         if joy.Guide():
             # close the xbox python interface program
             joy.close()
@@ -33,12 +34,13 @@ def cozmo_program(robot: cozmo.robot.Robot):
         elif x is not None:
             # TODO: we have to figure out how to speed the treads to turn
             cozmo_movement(robot, scalar=x)
-        elif left_Trigger:
+        elif right_Trigger:
             
             # Move lift takes the parameter speed which is a float in radians per second
-            move_lift(10.0)
-        elif right_Trigger:
-            pass
+            robot.move_lift(10.0)
+        elif left_Trigger:
+            
+            robot.move_lift(-10.0)
 
 def cozmo_movement(robot: cozmo.robot.Robot, scalar):
     """
